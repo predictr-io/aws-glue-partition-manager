@@ -1,0 +1,69 @@
+name: 'AWS Glue Partition Manager'
+description: 'Manage AWS Glue catalog partitions - add, delete, and check existence'
+author: 'predictr-io'
+
+branding:
+  icon: 'database'
+  color: 'purple'
+
+inputs:
+  # Operation
+  operation:
+    description: 'Operation to perform: add, delete, or exists'
+    required: true
+
+  # Glue Catalog parameters
+  database:
+    description: 'Glue database name'
+    required: true
+
+  table:
+    description: 'Glue table name'
+    required: true
+
+  partition-values:
+    description: 'Partition values as key=value pairs (e.g., "date=2025-11-24" or "year=2025;month=11;day=24")'
+    required: true
+
+  # S3 location (required for add operation)
+  s3-bucket:
+    description: 'S3 bucket name for partition location (required for add operation)'
+    required: false
+
+  s3-prefix:
+    description: 'S3 prefix/key for partition location (required for add operation)'
+    required: false
+
+  # Optional parameters
+  catalog-id:
+    description: 'AWS account ID for cross-account catalog access (defaults to current account)'
+    required: false
+
+  if-not-exists:
+    description: 'For "add" operation: skip if partition already exists without error (default: true)'
+    required: false
+    default: 'true'
+
+  storage-descriptor:
+    description: 'Custom storage descriptor as JSON (optional for "add" operation, inherits from table if not specified)'
+    required: false
+
+outputs:
+  success:
+    description: 'Whether the operation succeeded (true/false)'
+
+  exists:
+    description: 'Whether the partition exists (for exists action, or after add/delete operations)'
+
+  partition-values:
+    description: 'The partition values that were operated on'
+
+  location:
+    description: 'S3 location of the partition (for "add" and "exists" operations)'
+
+  created-at:
+    description: 'Partition creation timestamp (for "exists" operation when partition found)'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
