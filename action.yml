@@ -62,7 +62,7 @@ outputs:
     description: 'S3 location of the partition (for "add" and "exists" operations)'
 
   created-at:
-    description: 'Partition creation timestamp (for "exists" operation when partition found)'
+    description: 'Partition creation timestamp in ISO 8601 format (for "exists" operation when partition found)'
 
 runs:
   using: 'node20'
