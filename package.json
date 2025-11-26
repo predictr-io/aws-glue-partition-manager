@@ -1,6 +1,6 @@
 {
   "name": "aws-glue-partition-manager",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "GitHub Action to manage AWS Glue catalog partitions",
   "main": "dist/index.js",
   "scripts": {
