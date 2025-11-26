@@ -65,5 +65,5 @@ outputs:
     description: 'Partition creation timestamp in ISO 8601 format (for "exists" operation when partition found)'
 
 runs:
-  using: 'node20'
+  using: 'node24'
   main: 'dist/index.js'
